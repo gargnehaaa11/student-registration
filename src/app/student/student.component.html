@@ -1,0 +1,104 @@
+<nav class="navbar navbar-light" style="background-color: paleturquoise;
+">
+    <div class="container-fluid">
+        <h2 style="font-family: inherit;">School Enrollment App</h2>
+        <div class="d-flex">
+            <button type="button" (click)="clickAddStudent()" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Student</button>
+        </div>
+    </div>
+</nav>
+<!-- Jumbotron starts-->
+<div class="p-5 mb-4 bg-light rounded-3">
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">School Records Management</h1>
+        <p class="col-md-8 fs-4">you Can Save Records of School Using Angular 12</p>
+        <a class="btn btn-lg" type="button" target="_blank"  style=" background-color: brown; color:white"
+        href="https://www.youtube.com/">TestCode</a> 
+    </div>
+</div>
+<!-- Jumbotron Ends-->
+<!-- Table starts here-->
+<table class="w-100 table mt-4 p-0" style="border : 1px solid lightgrey">
+    <thead>
+        <tr>
+            <th scope="col">S No</th>
+            <th scope="col">Student Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Mobile No</th>
+            <th scope="col"> Date Of Birth</th>
+            <th scope="col">Gender</th>
+            <th scope="col">City</th>
+            <th scope="col">State</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let row of studentData">
+            <td>{{row.id}}</td>
+            <td>{{row.sname}}</td>
+            <td>{{row.email}}</td>
+            <td>{{row.mobile}}</td>
+            <td>{{row.dob}}</td>
+            <td>{{row.gender}}</td>
+            <td>{{row.city}}</td>
+            <td>{{row.state}}</td>
+            <td>
+               <button class="btn btn-info" (click)="editStudent(row)" type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button> &nbsp;
+               <button class="btn btn-danger" (click)="deleteStudent(row)">Delete</button> 
+            </td>
+        </tr>
+    </tbody>
+</table>
+<!-- Table ends here-->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header" style="background: crimson;
+        color: white;">
+          <h5 class="modal-title" id="exampleModalLabel">Student Enrollment Form</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body student-modal">
+            <form [formGroup]="studentForm">
+                <!-- <h6 style="color: chocolate;">Basic Information Section</h6> -->
+                <div class="form-group mb-3">
+                  <label class="form-label"> Name</label>
+                  <input type="text" placeholder="" class="form-control" formControlName="sname">
+                </div>
+                <div class="form-group mb-3">
+                  <label class="form-label">Email Id</label>   
+                  <input type="email" formControlName="email" placeholder="" class="form-control">
+                </div>
+                <div class="form-group mb-3">
+                    <label class="form-label">Mobile</label>
+                    <input type="text" formControlName="mobile" placeholder="" class="form-control">
+                  </div>
+                  <div class="form-group mb-3">
+                    <label class="form-label">Date Of Birth</label>
+                    <input type="text" formControlName="dob" placeholder="" class="form-control">
+                  </div>
+                 <div class="form-group mb-3">
+                    <label class="form-label">Gender</label>
+                    <input type="text" formControlName="gender" placeholder="" class="form-control">
+                  </div> 
+                  <div class="form-group mb-3">
+                    <label class="form-label">City</label>
+                    <input type="text" formControlName="city" placeholder="" class="form-control">
+                  </div> 
+                  <div class="form-group mb-3">
+                    <label class="form-label">State</label>
+                    <input type="text" formControlName="state" placeholder="" class="form-control">
+                  </div>  
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="cancel" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" *ngIf="showAdd" (click)="postStudentData()">
+            Add </button>
+          <button type="button" class="btn btn-primary" *ngIf="showBtn" (click)="updateStudentData()">Update </button>
+        </div>
+      </div>
+    </div>
+  </div>
